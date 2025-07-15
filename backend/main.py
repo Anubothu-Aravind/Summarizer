@@ -14,7 +14,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://*.app.github.dev",  # Allow all Codespaces domains
-        "http://localhost:3000",     # Local development
+        "http://localhost:8000",     # Local development
         "http://localhost:5173",     # Vite default
     ],
     allow_credentials=True,
@@ -69,14 +69,18 @@ async def ask_question(question: str = Form(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing question: {str(e)}")
 
+# Add this to your TTS endpoint for debugging
 @app.post("/tts")
 async def text_to_speech_endpoint(text: str = Form(...)):
     """Convert text to speech"""
     try:
+        print(f"Received text: {text[:50]}...")  # Debug log
         audio_path = text_to_speech(text)
+        print(f"Audio file created at: {audio_path}")  # Debug log
         return FileResponse(audio_path, media_type="audio/wav", filename="response.wav")
     
     except Exception as e:
+        print(f"TTS Error: {e}")  # Debug log
         raise HTTPException(status_code=500, detail=f"Error generating speech: {str(e)}")
 
 # Health check endpoint

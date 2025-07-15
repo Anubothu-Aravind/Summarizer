@@ -1,17 +1,21 @@
-import pyttsx3
+from gtts import gTTS
 import tempfile
 import os
 
 def text_to_speech(text):
-    """Convert text to speech and return audio file path"""
-    engine = pyttsx3.init()
+    try:
+        # Create TTS object
+        tts = gTTS(text=text, lang='en', slow=False)
+        
+        # Create temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as tmp_file:
+            audio_path = tmp_file.name
+        
+        # Save to file
+        tts.save(audio_path)
+        
+        return audio_path
     
-    # Configure voice settings
-    engine.setProperty('rate', 150)
-    engine.setProperty('volume', 0.8)
-    
-    # Create temporary audio file
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as tmp_file:
-        engine.save_to_file(text, tmp_file.name)
-        engine.runAndWait()
-        return tmp_file.name
+    except Exception as e:
+        print(f"TTS Error: {e}")
+        raise e

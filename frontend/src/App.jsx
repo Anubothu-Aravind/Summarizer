@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 
-const API_BASE_URL = "https://fictional-enigma-g9q79jvr7753947w-8000.app.github.dev/";
+const API_BASE_URL = "http://localhost:8000";
 
 function App() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -144,7 +144,7 @@ function App() {
           "Content-Type": "multipart/form-data",
         },
         responseType: "blob",
-        timeout: 15000, // 15 seconds timeout for TTS
+        timeout: 45000, // 45 seconds timeout for TTS
       });
       
       const audioBlob = new Blob([response.data], { type: "audio/wav" });

@@ -1,4 +1,4 @@
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain_groq import ChatGroq
@@ -19,7 +19,7 @@ def get_qa_chain(chunks):
     vectorstore = FAISS.from_documents(chunks, embeddings)
     
     # Initialize Groq LLM
-    llm = Groq(
+    llm = ChatGroq(
         groq_api_key=os.getenv("GROQ_API_KEY"),
         model_name="llama3-70b-8192"
     )
