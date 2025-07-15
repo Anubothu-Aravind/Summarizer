@@ -126,9 +126,3 @@ Summarizer/
 - `npm run build` — Build the frontend for production.
 - `npm run preview` — Preview the production build.
 - `npm run lint` — Lint the frontend code.
-
----
-
-## License
-
-MIT 
