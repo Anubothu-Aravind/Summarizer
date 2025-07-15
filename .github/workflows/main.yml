@@ -1,0 +1,31 @@
+name: Keep Backend Alive
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+  workflow_dispatch:       # Manual trigger option
+
+jobs:
+  ping-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Ping backend to keep it alive
+        run: |
+          python -c "
+import requests
+url = 'https://summarizer-puxa.onrender.com/ping'
+try:
+    res = requests.get(url)
+    print(f'Success ✅: {res.status_code} | Response: {res.json()}')
+except Exception as e:
+    print(f'❌ Failed to ping backend: {e}')
+          "
