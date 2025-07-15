@@ -3,7 +3,7 @@ name: Keep Backend Alive
 on:
   schedule:
     - cron: '*/5 * * * *'  # Every 5 minutes
-  workflow_dispatch:       # Manual trigger option
+  workflow_dispatch:
 
 jobs:
   ping-backend:
@@ -28,4 +28,4 @@ try:
     print(f'Success ✅: {res.status_code} | Response: {res.json()}')
 except Exception as e:
     print(f'❌ Failed to ping backend: {e}')
-          "
+"
