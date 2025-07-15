@@ -1,3 +1,4 @@
+# backend/requirements.txt
 fastapi
 uvicorn
 langchain>=0.2.2

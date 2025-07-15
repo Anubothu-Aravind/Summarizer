@@ -1,3 +1,4 @@
+// frontend/src/App.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
@@ -182,7 +183,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>📚 SummarEase</h1>
+        <h1>📚 DocDistill</h1>
         <p>Your AI-Powered Research Paper Assistant</p>
         <div className="status-indicator" style={{ color: getStatusColor() }}>
           {getStatusText()}
@@ -249,6 +250,36 @@ function App() {
           </div>
         )}
       </main>
+      
+      <footer className="App-footer">
+  <div className="footer-content">
+    <div className="footer-section">
+      <h3>📚 About</h3>
+      <p>
+        DocDistill is an AI-powered tool that helps users extract insights from academic PDFs through natural language queries. It streamlines research by combining intelligent processing with a clean, user-friendly interface.
+      </p>
+    </div>
+
+    <div className="footer-section">
+      <h3>👨‍💻 Developer</h3>
+      <p>
+        Created by <strong>Anubothu Aravind</strong> , a developer passionate about building accessible, AI-driven tools. This project showcases skills in modern full-stack development and user-focused design.
+      </p>
+    </div>
+
+    <div className="footer-section">
+      <h3>🔗 Contact</h3>
+      <p>
+        Connect via <a href="https://t.me/iarvn1" target="_blank" rel="noopener noreferrer">Telegram</a>, 
+        <a href="mailto:aravind.anubothu@gmail.com"> Email</a>, or find me on LinkedIn/GitHub for feedback or collaboration.
+      </p>
+    </div>
+  </div>
+
+  <div className="footer-bottom">
+    <p>&copy; 2024 DocDistill. Developed by Anubothu Aravind.</p>
+  </div>
+</footer>
     </div>
   );
 }

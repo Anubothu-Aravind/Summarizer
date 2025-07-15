@@ -1,4 +1,4 @@
-/* Reset and base styles */
+/* frontend/src/App.css */
 * {
   margin: 0;
   padding: 0;
@@ -20,6 +20,8 @@ body {
   margin: 0 auto;
   padding: 20px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-header {
@@ -49,6 +51,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  flex: 1;
 }
 
 .upload-section, .question-section, .answer-section {
@@ -178,6 +181,114 @@ input[type="file"]:hover {
   background-color: #f0f2ff;
 }
 
+/* Error section */
+.error-section {
+  background-color: #fff5f5;
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid #fed7d7;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.error-section h3 {
+  color: #e53e3e;
+  margin-bottom: 15px;
+}
+
+.error-section p {
+  color: #2d3748;
+  margin-bottom: 10px;
+}
+
+.error-section code {
+  background-color: #f7fafc;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: monospace;
+  display: block;
+  margin: 10px 0;
+}
+
+/* Footer Styles - Updated to Medium Padding */
+.App-footer {
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  color: white;
+  padding: 10px 0 5px; /* Reduced from 25px 0 15px */
+  margin-top: 10px; /* Reduced from 30px */
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.footer-content {
+  display: block;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 15px;
+}
+
+.footer-section {
+  text-align: left;
+  margin-bottom: 10px; /* Reduced from 20px */
+}
+
+.footer-section h3 {
+  font-size: 1.2em;
+  margin-bottom: 3px; /* Reduced from 10px */
+  color: #ecf0f1;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-section p {
+  line-height: 1.2; /* Reduced from 1.5 */
+  color: #bdc3c7;
+  font-size: 0.9em;
+  margin-bottom: 3px; /* Reduced from 8px */
+}
+
+.footer-section strong {
+  color: #ecf0f1;
+  font-weight: 600;
+}
+
+.footer-section a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #5dade2;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 5px; /* Reduced from 15px */
+  margin-top: 5px; /* Reduced from 15px */
+  border-top: 1px solid #34495e;
+}
+
+.footer-bottom p {
+  color: #95a5a6;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+/* Status indicator */
+.status-indicator {
+  font-size: 1em;
+  font-weight: 600;
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: inline-block;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .App {
@@ -208,6 +319,38 @@ input[type="file"]:hover {
   button {
     width: 100%;
   }
+  
+  .footer-content {
+    padding: 0 10px;
+  }
+  
+  .footer-section {
+    text-align: center;
+    margin-bottom: 5px; /* Reduced from 15px */
+  }
+  
+  .App-footer {
+    padding: 10px 0 5px; /* Reduced from 20px 0 10px */
+    margin-top: 15px; /* Reduced from 20px */
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    padding: 20px;
+  }
+  
+  .App-header h1 {
+    font-size: 1.8em;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.1em;
+  }
+  
+  .footer-section p {
+    font-size: 0.9em;
+  }
 }
 
 /* Loading animation */
@@ -219,4 +362,22 @@ input[type="file"]:hover {
 
 button:disabled {
   animation: pulse 1.5s infinite;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .App-footer {
+    display: none;
+  }
 }
