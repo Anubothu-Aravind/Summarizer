@@ -6,18 +6,16 @@ from rag_engine import get_qa_chain
 from pdf_utils import parse_pdf
 from tts import text_to_speech
 import tempfile
+import time
+import datetime
 import os
 
 app = FastAPI(title="SummarEase API", version="1.0.0")
-
+start_time = time.time()
 # Configure CORS for Vite dev server
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://*.app.github.dev",  # Allow all Codespaces domains
-        "http://localhost:8000",     # Local development
-        "http://localhost:5173",     # Vite default
-    ],
+    allow_origins=["*"],  # Only if safe in your use case
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -88,6 +86,15 @@ async def text_to_speech_endpoint(text: str = Form(...)):
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "qa_chain_loaded": qa_chain is not None}
+
+@app.get("/ping")
+async def ping():
+    return {
+        "status": "healthy",
+        "timestamp": datetime.datetime.now().isoformat(),
+        "uptime_seconds": round(time.time() - start_time, 2),
+        "status_code": 200
+    }
 
 if __name__ == "__main__":
     import uvicorn
