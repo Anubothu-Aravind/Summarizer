@@ -4,7 +4,7 @@ import axios from "axios";
 import "./App.css";
 
 
-const API_BASE_URL = "https://summarizer-puxa.onrender.com/";
+const API_BASE_URL = "http://localhost:8000";
 
 function App() {
   const [pdfFile, setPdfFile] = useState(null);
@@ -62,7 +62,7 @@ function App() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        timeout: 30000, // 30 seconds timeout for file upload
+        timeout: 60000, // 30 seconds timeout for file upload
       });
       
       alert(`PDF uploaded successfully! Processed ${response.data.chunks} chunks.`);
@@ -109,7 +109,7 @@ function App() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        timeout: 30000, // 30 seconds timeout for question processing
+        timeout: 60000, // 30 seconds timeout for question processing
       });
       
       setAnswer(response.data.answer);
