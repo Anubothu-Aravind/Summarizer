@@ -10,5 +10,6 @@ pyttsx3
 python-dotenv
 pypdf
 python-multipart
+langchain-huggingface
 groq
 gtts

@@ -4,7 +4,7 @@ import axios from "axios";
 import "./App.css";
 
 
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "https://summarizer-puxa.onrender.com/";
 
 function App() {
   const [pdfFile, setPdfFile] = useState(null);
