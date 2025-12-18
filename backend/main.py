@@ -45,12 +45,20 @@ async def upload_pdf(file: UploadFile):
         
         # Parse PDF and create QA chain
         chunks = parse_pdf(tmp_path)
+        print(f"Parsed {len(chunks)} chunks from PDF")
+        if chunks:
+            print(f"Sample chunk: {chunks[0].page_content[:200]}...")
+        
         qa_chain = get_qa_chain(chunks)
         
         # Clean up temporary file
         os.unlink(tmp_path)
         
-        return {"message": f"PDF '{file.filename}' processed successfully", "chunks": len(chunks)}
+        return {
+            "message": f"PDF '{file.filename}' processed successfully", 
+            "chunks": len(chunks),
+            "sample": chunks[0].page_content[:100] if chunks else ""
+        }
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing PDF: {str(e)}")
@@ -62,10 +70,25 @@ async def ask_question(question: str = Form(...)):
         raise HTTPException(status_code=400, detail="Please upload a PDF first")
     
     try:
-        response = qa_chain.run(question)
-        return {"answer": response}
+        print(f"Processing question: {question}")
+        
+        # Use invoke() with proper input key
+        response = qa_chain.invoke({"query": question})
+        
+        print(f"Raw response: {response}")
+        
+        # Extract the result - RetrievalQA returns dict with "result" key
+        if isinstance(response, dict):
+            answer = response.get("result", str(response))
+        else:
+            answer = str(response)
+        
+        print(f"Final answer: {answer[:200]}...")
+        
+        return {"answer": answer}
     
     except Exception as e:
+        print(f"Error in /ask endpoint: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing question: {str(e)}")
 
 # Add this to your TTS endpoint for debugging

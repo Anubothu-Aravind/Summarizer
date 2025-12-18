@@ -25,7 +25,7 @@ const AnswerDisplay = ({ answer, backendStatus }) => {
           "Content-Type": "multipart/form-data",
         },
         responseType: "blob",
-        timeout: 45000,
+        timeout: 60000,
       });
 
       const audioBlob = new Blob([response.data], { type: "audio/wav" });
